@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosquito Kingdom — The Royal Animation Experience</title>
+    <meta name="description"
+        content="Welcome to the Mosquito Kingdom — The legendary animated domain of Catherine D'Silva, the Eternal Mosquito Queen.">
+    <meta name="theme-color" content="#1a002b">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- Page Loader -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="page-loader">
+        <div class="loader-content">
+            <div class="loader-crown">👑</div>
+            <div class="loader-text">Entering the Kingdom…</div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- Cursor Glow (desktop only) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="cursor-glow"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- Canvas for Particles / Fireflies -->
+    <!-- ═══════════════════════════════════════════ -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- Sound Toggle -->
+    <!-- ═══════════════════════════════════════════ -->
+    <button id="sound-toggle" aria-label="Toggle ambient sound" title="Toggle Sound">
+        <span class="sound-icon sound-on">🔊</span>
+        <span class="sound-icon sound-off">🔇</span>
+    </button>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="hero" class="scene scene-night">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-mosquito-silhouette" id="hero-mosquito">
+                <svg viewBox="0 0 200 200" class="mosquito-svg">
+                    <g class="mosquito-body" fill="none" stroke="var(--cyan)" stroke-width="1.5">
+                        <!-- Body -->
+                        <ellipse cx="100" cy="110" rx="12" ry="28" opacity="0.8" />
+                        <!-- Head -->
+                        <circle cx="100" cy="75" r="10" opacity="0.8" />
+                        <!-- Proboscis -->
+                        <line x1="100" y1="65" x2="100" y2="40" stroke-width="1" />
+                        <!-- Wings -->
+                        <ellipse cx="78" cy="100" rx="25" ry="10" class="wing wing-left" opacity="0.5" />
+                        <ellipse cx="122" cy="100" rx="25" ry="10" class="wing wing-right" opacity="0.5" />
+                        <!-- Legs -->
+                        <line x1="90" y1="120" x2="70" y2="145" />
+                        <line x1="95" y1="125" x2="75" y2="155" />
+                        <line x1="100" y1="130" x2="80" y2="160" />
+                        <line x1="110" y1="120" x2="130" y2="145" />
+                        <line x1="105" y1="125" x2="125" y2="155" />
+                        <line x1="100" y1="130" x2="120" y2="160" />
+                    </g>
+                </svg>
+            </div>
+
+            <h1 class="hero-title anim-hidden">
+                <span class="title-line">Welcome to the</span>
+                <span class="title-line title-kingdom">Mosquito Kingdom</span>
+            </h1>
+            <p class="hero-subtitle anim-hidden">Ruled by the One and Only — <strong>Catherine D'Silva</strong></p>
+
+            <!-- Enter the Kingdom Button -->
+            <button id="enter-kingdom-btn" class="royal-btn anim-hidden">
+                <span class="btn-text">Enter the Kingdom</span>
+                <span class="btn-ripple"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- WELCOME TRANSITION OVERLAY -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="welcome-overlay" class="hidden">
+        <div class="welcome-content">
+            <div class="welcome-crown">👑</div>
+            <h2 class="welcome-text">Welcome to your Mosquito Kingdom,</h2>
+            <h2 class="welcome-name">Mosquito Queen.</h2>
+            <div class="welcome-sparkles"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ROYAL DASHBOARD -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="dashboard" class="scene scene-forest scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">Royal Dashboard</h2>
+                <div class="title-decoration"></div>
+            </div>
+
+            <div class="dashboard-card glass-panel">
+                <div class="queen-info">
+                    <div class="queen-avatar">
+                        <div class="avatar-ring"></div>
+                        <span class="avatar-emoji">🦟</span>
+                    </div>
+                    <div class="queen-details">
+                        <h3 class="queen-name">Catherine D'Silva</h3>
+                        <p class="queen-title">Supreme Guardian of the Night Realm</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel-inner scroll-reveal">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value" data-target="9999">0</div>
+                        <div class="stat-label">Buzz Power Level</div>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" data-width="97"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel-inner scroll-reveal">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-value" data-target="8750">0</div>
+                        <div class="stat-label">Night Vision Index</div>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" data-width="87"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel-inner scroll-reveal">
+                        <div class="stat-icon">👑</div>
+                        <div class="stat-value" data-target="10000">0</div>
+                        <div class="stat-label">Swarm Authority</div>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" data-width="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- THRONE ROOM -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="throne" class="scene scene-throne scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">The Royal Throne Chamber</h2>
+                <div class="title-decoration"></div>
+            </div>
+
+            <div class="throne-content">
+                <div class="throne-visual">
+                    <div class="throne-emoji-art">
+                        <span class="throne-piece throne-glow">🏰</span>
+                    </div>
+                    <div class="throne-rings">
+                        <div class="throne-ring ring-1"></div>
+                        <div class="throne-ring ring-2"></div>
+                        <div class="throne-ring ring-3"></div>
+                    </div>
+                </div>
+
+                <div class="throne-declaration glass-panel scroll-reveal">
+                    <p class="declaration-text">
+                        <em>"In the darkest hour of night, when stars bow and shadows kneel,
+                            only one reign persists — the eternal dominion of the Mosquito Queen."</em>
+                    </p>
+                    <span class="declaration-sig">— The Mosquito Kingdom Archives</span>
+                </div>
+
+                <div class="abilities-grid">
+                    <div class="ability-card glass-panel-inner scroll-reveal">
+                        <div class="ability-icon floating">🌙</div>
+                        <h4>Night Sovereignty</h4>
+                        <p>Commands the darkness itself</p>
+                    </div>
+                    <div class="ability-card glass-panel-inner scroll-reveal">
+                        <div class="ability-icon floating" style="animation-delay:-0.5s">🌀</div>
+                        <h4>Swarm Mastery</h4>
+                        <p>Leads the buzzing legion</p>
+                    </div>
+                    <div class="ability-card glass-panel-inner scroll-reveal">
+                        <div class="ability-icon floating" style="animation-delay:-1s">✨</div>
+                        <h4>Glow Enchanting</h4>
+                        <p>Illuminates the realm</p>
+                    </div>
+                    <div class="ability-card glass-panel-inner scroll-reveal">
+                        <div class="ability-icon floating" style="animation-delay:-1.5s">🛡️</div>
+                        <h4>Royal Shield</h4>
+                        <p>Impervious to all threats</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ROYAL DECREE SCROLLING TICKER -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="royal-ticker" class="scroll-reveal">
+        <div class="ticker-track">
+            <div class="ticker-content">
+                👑 Royal Decree: All subjects must bow when Mosquito Queen enters ·
+                🦟 Breaking: Catherine D'Silva spotted ruling the night sky ·
+                ⚡ Alert: Buzz Power Level exceeds all known records ·
+                🌙 Notice: The night belongs to the Mosquito Queen ·
+                ✨ Update: Mosquito swarm loyalty index at 100% ·
+                🏰 Decree: No mortal may challenge the Queen's authority ·
+                👑 Reminder: It's always Mosquito Queen appreciation hour ·
+                🦟 News Flash: Catherine D'Silva officially too powerful to stop ·
+            </div>
+            <div class="ticker-content" aria-hidden="true">
+                👑 Royal Decree: All subjects must bow when Mosquito Queen enters ·
+                🦟 Breaking: Catherine D'Silva spotted ruling the night sky ·
+                ⚡ Alert: Buzz Power Level exceeds all known records ·
+                🌙 Notice: The night belongs to the Mosquito Queen ·
+                ✨ Update: Mosquito swarm loyalty index at 100% ·
+                🏰 Decree: No mortal may challenge the Queen's authority ·
+                👑 Reminder: It's always Mosquito Queen appreciation hour ·
+                🦟 News Flash: Catherine D'Silva officially too powerful to stop ·
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MOSQUITO BITE COUNTER + BOW DOWN -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="bite-section" class="scene scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">Royal Interaction Center</h2>
+                <div class="title-decoration"></div>
+            </div>
+
+            <div class="interaction-grid">
+                <!-- Bite Counter -->
+                <div class="glass-panel interaction-card scroll-reveal">
+                    <div class="bite-icon">🦟</div>
+                    <h3 class="interaction-title">Mosquito Bite Counter</h3>
+                    <p class="interaction-desc">Every click is a royal mosquito bite!</p>
+                    <div class="bite-counter-display">
+                        <span id="bite-count">0</span>
+                        <span class="bite-label">bites</span>
+                    </div>
+                    <button id="bite-btn" class="royal-btn royal-btn-sm">
+                        <span class="btn-text">🦟 Get Bitten!</span>
+                    </button>
+                    <p id="bite-reaction" class="bite-reaction"></p>
+                </div>
+
+                <!-- Bow Down Button -->
+                <div class="glass-panel interaction-card scroll-reveal">
+                    <div class="bite-icon">🙇</div>
+                    <h3 class="interaction-title">Pay Respects</h3>
+                    <p class="interaction-desc">Show proper reverence to the Queen!</p>
+                    <button id="bow-btn" class="royal-btn royal-btn-gold royal-btn-sm">
+                        <span class="btn-text">👑 Bow Down to the Queen</span>
+                    </button>
+                    <div id="bow-counter" class="bow-counter">
+                        Bows received: <strong id="bow-count">0</strong>
+                    </div>
+                </div>
+
+                <!-- Worship Meter -->
+                <div class="glass-panel interaction-card scroll-reveal">
+                    <div class="bite-icon">💖</div>
+                    <h3 class="interaction-title">Worship Meter</h3>
+                    <p class="interaction-desc">How devoted are you to the Queen?</p>
+                    <div class="worship-meter">
+                        <div class="worship-bar">
+                            <div id="worship-fill" class="worship-fill"></div>
+                        </div>
+                        <span id="worship-level" class="worship-level">Peasant</span>
+                    </div>
+                    <p class="worship-hint">Keep interacting to increase devotion!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MOSQUITO FACTS SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="facts-section" class="scene scene-forest scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">Royal Mosquito Facts</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <p class="facts-subtitle scroll-reveal">Things you didn't know about Queen Catherine's Kingdom 🦟</p>
+
+            <div class="facts-carousel glass-panel scroll-reveal">
+                <div id="fact-display" class="fact-display">
+                    <span class="fact-emoji">🦟</span>
+                    <p id="fact-text" class="fact-text">Click to reveal a royal fact…</p>
+                </div>
+                <button id="next-fact-btn" class="royal-btn royal-btn-sm">
+                    <span class="btn-text">✨ Next Royal Fact</span>
+                </button>
+                <div class="fact-counter">
+                    Fact <span id="fact-number">0</span> / <span id="fact-total">0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ROYAL QUIZ -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="quiz-section" class="scene scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">The Royal Quiz</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <p class="quiz-subtitle scroll-reveal">Do you truly know the Mosquito Queen? Prove your loyalty! 👑</p>
+
+            <div class="quiz-container glass-panel scroll-reveal">
+                <div id="quiz-content">
+                    <h3 id="quiz-question" class="quiz-question">Ready to test your loyalty?</h3>
+                    <div id="quiz-options" class="quiz-options"></div>
+                    <div id="quiz-result" class="quiz-result hidden"></div>
+                </div>
+                <button id="quiz-start-btn" class="royal-btn royal-btn-gold royal-btn-sm">
+                    <span class="btn-text">⚔️ Begin the Quiz</span>
+                </button>
+                <div id="quiz-score" class="quiz-score hidden">
+                    Score: <strong id="quiz-score-value">0</strong> / <span id="quiz-total">0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MOSQUITO CATCH MINI-GAME -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="game-section" class="scene scene-throne scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">Catch the Royal Mosquito</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <p class="game-subtitle scroll-reveal">Can you catch the Queen's royal mosquito? (Hint: probably not 😏)</p>
+
+            <div class="game-arena glass-panel scroll-reveal">
+                <div id="game-area" class="game-area">
+                    <div id="catch-mosquito" class="catch-mosquito">🦟</div>
+                </div>
+                <div class="game-stats">
+                    <span>Catches: <strong id="catch-count">0</strong></span>
+                    <span>Misses: <strong id="miss-count">0</strong></span>
+                    <span id="game-taunt" class="game-taunt">Try to click the mosquito!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ROYAL ROAST SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="roast-section" class="scene scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">Royal Proclamations</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <p class="roast-subtitle scroll-reveal">
+                Gentle reminders about the Queen's absolute superiority 👑
+            </p>
+
+            <div class="roast-cards">
+                <div class="roast-card glass-panel-inner scroll-reveal">
+                    <span class="roast-emoji">🦟</span>
+                    <p>"Catherine doesn't get mosquito bites. Mosquitoes get Catherine bites."</p>
+                </div>
+                <div class="roast-card glass-panel-inner scroll-reveal">
+                    <span class="roast-emoji">👑</span>
+                    <p>"When Catherine walks into a room, even the Wi-Fi signal gets stronger."</p>
+                </div>
+                <div class="roast-card glass-panel-inner scroll-reveal">
+                    <span class="roast-emoji">⚡</span>
+                    <p>"Catherine's vibe check has a 100% passing rate — for herself."</p>
+                </div>
+                <div class="roast-card glass-panel-inner scroll-reveal">
+                    <span class="roast-emoji">🌙</span>
+                    <p>"Scientists wanted to study Catherine's power. She declined. Too busy ruling."</p>
+                </div>
+                <div class="roast-card glass-panel-inner scroll-reveal">
+                    <span class="roast-emoji">🏰</span>
+                    <p>"Catherine's kingdom doesn't have borders. The borders have Catherine."</p>
+                </div>
+                <div class="roast-card glass-panel-inner scroll-reveal">
+                    <span class="roast-emoji">✨</span>
+                    <p>"Plot twist: The entire internet was created just to host this website for Catherine."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CERTIFICATE SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="certificate-section" class="scene scroll-reveal">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title glow-text">Royal Decree</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <p class="cert-intro scroll-reveal">Summon the official Royal Certificate of the Mosquito Kingdom.</p>
+            <button id="generate-cert-btn" class="royal-btn royal-btn-gold scroll-reveal">
+                <span class="btn-text">Generate Royal Certificate</span>
+                <span class="btn-ripple"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CERTIFICATE MODAL -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="certificate-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content certificate-paper" id="certificate-content">
+            <button id="close-cert" class="modal-close" aria-label="Close certificate">&times;</button>
+            <div class="cert-border">
+                <div class="cert-corner cert-tl"></div>
+                <div class="cert-corner cert-tr"></div>
+                <div class="cert-corner cert-bl"></div>
+                <div class="cert-corner cert-br"></div>
+
+                <div class="cert-crown">👑</div>
+                <h2 class="cert-title">Royal Declaration of the Mosquito Kingdom</h2>
+                <div class="cert-divider"></div>
+                <p class="cert-body">
+                    This certifies that<br><br>
+                    <strong class="cert-name">Catherine D'Silva</strong><br><br>
+                    is hereby crowned as the <em>Eternal Mosquito Queen</em>,<br>
+                    Ruler of the Midnight Skies,<br>
+                    Commander of the Buzzing Legion,<br>
+                    and Sovereign of the Glowing Night Realm.<br><br>
+                    May her wings shimmer,<br>
+                    May her reign echo through the winds,<br>
+                    And may the kingdom forever whisper her name.
+                </p>
+                <div class="cert-divider"></div>
+                <div class="cert-signature">
+                    <div class="cert-sig-line"></div>
+                    <p class="cert-signed">The Mosquito Kingdom</p>
+                </div>
+                <div class="cert-seal">🦟</div>
+            </div>
+            <button id="download-cert-btn" class="royal-btn royal-btn-sm">
+                <span class="btn-text">📜 Download Certificate</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CONFETTI CANVAS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NAME CHANT OVERLAY (hidden) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="chant-overlay" class="hidden"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer id="footer" class="scroll-reveal">
+        <div class="footer-content">
+            <div class="footer-crown">👑</div>
+            <p class="footer-text">Long live the Mosquito Queen — <strong>Catherine D'Silva</strong></p>
+            <p class="footer-sub">© 2026 The Mosquito Kingdom · All Realms Reserved</p>
+            <div class="footer-hints">
+                <p class="footer-hint">Press <kbd>M</kbd> three times for a storm ⛈️</p>
+                <p class="footer-hint">Press <kbd>Q</kbd> for a royal announcement 📢</p>
+                <p class="footer-hint">Press <kbd>C</kbd> for confetti 🎉</p>
+                <p class="footer-hint">Press <kbd>B</kbd> for a royal buzzing 🦟</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- STORM MODE OVERLAY (Easter Egg) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="storm-overlay" class="hidden">
+        <canvas id="storm-canvas"></canvas>
+        <div class="storm-text">🦟 MOSQUITO STORM MODE ACTIVATED 🦟</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ANNOYING POPUP MOSQUITO -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="popup-mosquito" class="hidden">
+        <div class="popup-mosquito-inner">
+            <span class="popup-mosquito-emoji">🦟</span>
+            <p class="popup-mosquito-text">Bzzzz! The Queen demands your attention!</p>
+            <button id="popup-mosquito-close" class="royal-btn royal-btn-sm">
+                <span class="btn-text">Yes, Your Majesty! 🙇</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
